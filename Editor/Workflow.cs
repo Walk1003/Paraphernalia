@@ -10,11 +10,11 @@ public class Workflow : Editor {
 
 	// From: http://wiki.unity3d.com/index.php/AddParent
 	// Original Author: Neil Carter (NCarter)
-	static void AddParent(Vector3 center) {
+	static void AddParent(Vector3 center, string name = "NewParent") {
 		Transform[] transforms = Selection.GetTransforms(SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable);
  		if (transforms.Length == 0) return;
 		
-		GameObject newParent = new GameObject("NewParent");
+		GameObject newParent = new GameObject(name);
 		Undo.RegisterCreatedObjectUndo(newParent, "create parent");
 		Transform newParentTransform = newParent.transform;
 		newParentTransform.position = center;
@@ -58,7 +58,7 @@ public class Workflow : Editor {
 	static void AddCameraPointAtCenter () {
 		Transform[] transforms = Selection.GetTransforms(SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable);
 		Vector3 centerXZ = System.Array.ConvertAll(transforms, t => t.position).Average();
- 		AddParent(new Vector3(centerXZ.x, Camera.main.transform.position.y, centerXZ.z));
+ 		AddParent(new Vector3(centerXZ.x, Camera.main.transform.position.y, centerXZ.z), "CameraPosition");
 	}
  
 	// From: http://wiki.unity3d.com/index.php/InvertSelection
