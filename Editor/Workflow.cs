@@ -58,7 +58,7 @@ public class Workflow : Editor {
 	static void AddCameraPointAtCenter () {
 		Transform[] transforms = Selection.GetTransforms(SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable);
 		Vector3 centerXZ = System.Array.ConvertAll(transforms, t => t.position).Average();
- 		AddParent(new Vector3(centerXZ.x, Camera.main.transform.position.y, centerXZ.z), "CameraPosition");
+ 		AddParent(new Vector3(centerXZ.x, Camera.main.transform.position.y, centerXZ.z + 1.5f), "CameraPosition");
 	}
  
 	// From: http://wiki.unity3d.com/index.php/InvertSelection
