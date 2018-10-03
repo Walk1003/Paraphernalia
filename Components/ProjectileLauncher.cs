@@ -50,13 +50,13 @@ public class ProjectileLauncher : MonoBehaviour {
         if (Time.time - launchTime > launchDelay) {
             launchTime = Time.time;
             int projectileCount = Mathf.Min(ammo, projectilesPerShot);
-            direction = Quaternion.AngleAxis(-spread * 0.5f, Vector3.forward) * direction;
-            Quaternion rotation = Quaternion.AngleAxis(spread / (float)projectileCount, Vector3.forward);
+            direction = Quaternion.AngleAxis(-spread * 0.5f, Vector3.up) * direction;
+            Quaternion rotation = Quaternion.AngleAxis(spread / (float)projectileCount, Vector3.up);
             for (int i = 0; i < projectileCount; i++) {
                 if (projectile == null) projectile = Spawner.Spawn(projectileName).GetComponent<Projectile>();
                 projectile.transform.position = transform.position;
                 direction = rotation * direction;
-                Vector3 fuzzedDir = Quaternion.AngleAxis(180 * Random.Range(accuracy-1, 1-accuracy), Vector3.forward) * direction;
+                Vector3 fuzzedDir = Quaternion.AngleAxis(180 * Random.Range(accuracy-1, 1-accuracy), Vector3.up) * direction;
                 projectile.Fire(fuzzedDir, parentVelocity);
                 projectile = null;
                 ammo--;
